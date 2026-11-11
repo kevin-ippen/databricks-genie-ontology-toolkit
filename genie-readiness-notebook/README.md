@@ -85,7 +85,7 @@ A few reading tips:
 
 ## How coverage is scored
 
-The app mostly scores whether a capability exists anywhere. This notebook scores how much of a **focus set** of tables has it, which is stricter and closer to what Genie experiences. The focus set is:
+Coverage measures how much of a **focus set** of tables has each capability, not whether it exists somewhere in the catalog. The focus set is:
 
 * the **gold layer**: tables matching `gold_schema_pattern` or `gold_table_pattern`, tables tagged with a layer/tier tag of gold, curated, mart, semantic, presentation or platinum, or certified tables;
 * plus the **25 tables used by the most distinct people** over 90 days (when system tables are on).
@@ -200,11 +200,3 @@ The heuristics are plain constants at the top of two cells, so they can be adapt
 * The vocabulary check uses conversation titles (usually the opening question), not every follow-up message.
 * The business-user access check needs grant visibility (catalog owner or `MANAGE`); otherwise it is skipped.
 * In `audit` mode, Genie signals are workspace-wide rather than scoped to the catalog.
-
-## Differences from the app
-
-* Coverage is scored on a focus set, not on whether a capability exists anywhere, so scores are stricter than the app's.
-* Semantic quality is new; the app has no equivalent.
-* Scope is the selected catalog(s), read from `<catalog>.information_schema`; the notebook never reads `system.information_schema`. The workspace-wide `hive_metastore` signal is left out.
-* Domains are scored from governed tags, not the native Domains API.
-* There is no LLM Plan tab. Paste the Markdown or JSON report into any assistant to draft a plan.
